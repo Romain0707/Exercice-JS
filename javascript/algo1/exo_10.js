@@ -5,5 +5,7 @@ for (let i = 1; i <= 100; i++ ) {
         console.log(i, "bar")
     } else if(i % 3 === 0 ) {
         console.log(i, "foo")
+    } else {
+        console.log(i)
     }
 }
