@@ -1,5 +1,4 @@
 const black = "⬛"
-const white = "⬜"
 const size = 20
 
 

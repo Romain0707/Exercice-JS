@@ -1,23 +1,32 @@
 
-let black = "⬛"
-let white = "⬜"
+const black = "⬛"
+const white = "⬜"
 
-let size = 25
-let n = 2
+const size = 25
+const interval = 2
+const spiralPattern = true
+
 
 for (let i = 0; i < size; i++) {
     let row = ""
-
-    for (let j = 0; j < size; j++) {
-    
-        if (i === 0 || i === size - 1 || j === 0 || j === size - 1 ) {
-            row += black
-        } else if ( i === n - 1|| i === size - n || j === n - 1 || j === size - n ) {
-            row += white
-        } else {
-            row += black
-        }
+    if(spiralPattern == false) {
+        for (let j = 0; j < size; j++) {
+            let x = Math.min(i, j, size - 1 - i, size - 1 - j);
         
+            if (x % interval === 0 ) {
+                row += black
+            } else {
+                row += white
+            }
+        }
+    } else {
+        for (let j = 0; j < size; j++) {
+        if ((i % 2 === 0 && j >= i && i < size - j) || (i % 2 === 0 && i >= j && j > size - i) || (j % 2 === 0 && j >= i && i > size - j - 1) || (j % 2 === 0 && i >= j && j < size - i + 1 )) {
+            row += black;
+        } else {
+            row += white;
+        }
+    }
     }
     console.log(row)
 }
