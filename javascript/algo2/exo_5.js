@@ -1,8 +1,8 @@
 
-const black = "⬛"
-const white = "⬜"
+let black = "⬛"
+let white = "⬜"
 
-const size = 25
+let size = 25
 
 for (let i = 0; i < size; i++) {
     let row = ""

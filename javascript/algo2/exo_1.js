@@ -1,6 +1,6 @@
-let black = "⬛"
-let white = "⬜"
-let size = 20
+const black = "⬛"
+const white = "⬜"
+const size = 20
 
 
 for (let i = 0; i <= size; i++) {
