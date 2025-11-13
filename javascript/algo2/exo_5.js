@@ -21,7 +21,7 @@ for (let i = 0; i < size; i++) {
         }
     } else {
         for (let j = 0; j < size; j++) {
-        if ((i % 2 === 0 && j >= i && i < size - j) || (i % 2 === 0 && i >= j && j > size - i) || (j % 2 === 0 && j >= i && i > size - j - 1) || (j % 2 === 0 && i >= j && j < size - i + 1 )) {
+        if ((i % interval === 0 && j >= i && i < size - j) || (i % interval === 0 && i >= j && j > size - i + interval - 1) || (j % interval === 0 && j >= i && i > size - j + interval - interval - 1) || (j % interval === 0 && i >= j && j < size - i + interval)) {
             row += black;
         } else {
             row += white;
