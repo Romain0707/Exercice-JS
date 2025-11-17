@@ -5,12 +5,8 @@ function mostFrequent(arr) {
     let maxCount = 1
 
     for (let i = 0; i < arr.length; i++) {
-        let count = 0    
-        for (let j = 0; j < arr.length; j++) {
-            if (arr[j] === arr[i]) {
-                count++
-            }
-        }
+        let count = countOccurances(arr, arr[i])    
+
         if (count > maxCount) {
             maxCount = count
             most = arr[i]
@@ -20,6 +16,9 @@ function mostFrequent(arr) {
     return most;
 }
 
+function countOccurances(arr, value) {
+    return arr.filter(element => element === value).length
+}
 
 console.log(mostFrequent(fruits))
 
