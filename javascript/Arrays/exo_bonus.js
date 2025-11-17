@@ -1,9 +1,5 @@
-function cleanInput(str) {
-    return str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-}
-
 function palindrome(str) {
-    str = cleanInput(str)
+    str = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
     let j = str.length - 1
     for (let i = 0; i < str.length / 2; i++) {
         if (str[i] != str[j]) {
@@ -14,8 +10,6 @@ function palindrome(str) {
     return true;
 }
 
-
-console.log(palindrome("eye"))
 console.log(palindrome("eye"))
 console.log(palindrome("_eye"))
 console.log(palindrome("race car"))
