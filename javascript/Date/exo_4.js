@@ -5,8 +5,7 @@ function daysUntil(wantedDate, targetDate) {
     targetDate = new Date(targetDate)
     wantedDate = new Date(wantedDate)
     const result = wantedDate.getTime() - targetDate.getTime()
-    const resultInDay = Math.floor(result / (1000 * 60 * 60 * 24))
-    return resultInDay
+    return Math.floor(result / (1000 * 60 * 60 * 24)) 
 }
 
 
