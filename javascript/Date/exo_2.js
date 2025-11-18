@@ -1,7 +1,4 @@
 
-
-
-
 function isValidDate(dateString) {
     let date = dateString.split("-")
     dateString = new Date(dateString)
