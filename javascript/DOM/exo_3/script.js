@@ -2,7 +2,7 @@ const miniImg = document.getElementsByClassName('thumbnail')
 const mainImg = document.getElementById('mainImage')
 
 
-
+console.log(miniImg)
 
 
 miniImg[0].addEventListener('click', function() {

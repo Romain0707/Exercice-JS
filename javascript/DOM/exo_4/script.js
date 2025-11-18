@@ -11,7 +11,7 @@ for (i = 0 ; i < countryList.childElementCount; i++) {
 
 // Ajouter un écouteur d'événement sur la barre de recherche
 input.addEventListener('input', function(event) {
-    const query = event.target.value.trim().toLowerCase();
+    const query = event.target.value.toLowerCase();
     countryList.innerHTML = '';
 
     // Filtrer les données en fonction de la requête
