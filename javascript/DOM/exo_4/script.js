@@ -1,35 +1,28 @@
-const countryList = document.getElementById('countryList')
-const input = document.getElementById('filterInput')
-const data = []
+const countryList = document.getElementById('countryList');
+const input = document.getElementById('filterInput');
 
+// On transforme la liste <li> en tableau de chaînes
+const data = Array.from(countryList.children).map(li => li.textContent);
 
-// On transforme la liste en tableau
-for (i = 0 ; i < countryList.childElementCount; i++) {
-    data.push(countryList.children[i].textContent)
+// Fonction de rendu
+function renderList(items) {
+    countryList.innerHTML = '';
+    if (items.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'Aucun résultat trouvé.';
+        countryList.appendChild(li);
+        return;
+    }
+    items.forEach(text => {
+        const li = document.createElement('li');
+        li.textContent = text;
+        countryList.appendChild(li);
+    });
 }
 
-
-// Ajouter un écouteur d'événement sur la barre de recherche
-input.addEventListener('input', function(event) {
+// Écouteur sur l'input
+input.addEventListener('input', (event) => {
     const query = event.target.value.toLowerCase();
-    countryList.innerHTML = '';
-
-    // Filtrer les données en fonction de la requête
-    const filteredData = data.filter(item => 
-        item.toLowerCase().includes(query) || 
-        item.toLowerCase().includes(query)
-    );
-
-    // Afficher les résultats
-    if (filteredData.length > 0) {
-        filteredData.forEach(item => {
-            const items = document.createElement('li');
-            items.textContent = item;
-            countryList.appendChild(items);
-        });
-    } else {
-        const items = document.createElement('li');
-        items.textContent = 'Aucun résultat trouvé.';
-        countryList.appendChild(items);
-    }
-})
+    const filtered = data.filter(item => item.toLowerCase().includes(query));
+    renderList(filtered);
+});
