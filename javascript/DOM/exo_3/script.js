@@ -1,7 +1,9 @@
-const miniImg = document.getElementsByClassName('thumbnail');
+const miniImg = document.querySelectorAll('.thumbnail');
 const mainImg = document.getElementById('mainImage');
 
-Array.from(miniImg).forEach(img => {
+
+
+miniImg.forEach(img => {
     img.addEventListener('click', () => {
         mainImg.src = img.src;
     });
