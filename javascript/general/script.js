@@ -6,10 +6,19 @@ const message = document.getElementById('message')
 function addTask() {
     const input = document.getElementById("taskInput") 
     const taskText = input.value // on prend l'input
+
+    const inputDate = document.getElementById("taskDate") 
+    const dateText = inputDate.value // on prend l'input
     
 
     if (taskText === "") {  // si il n'y a rien on affiche d'entrer quelque chose
         message.textContent = "Entrez un nom de tâche"
+        message.classList.add('text-red')
+        return
+    }
+
+    if (dateText === "") {  // si il n'y a rien on affiche d'entrer quelque chose
+        message.textContent = "Entrez une date"
         message.classList.add('text-red')
         return
     }
@@ -20,7 +29,7 @@ function addTask() {
         return
     }
 
-    const taskDiv = createTaskElement(taskText, false) // on créer la tâche en appelant la fonction createTaskElement (false pour que le bouton soit "Terminer" sinon c'est "En cours")
+    const taskDiv = createTaskElement(taskText, dateText, false) // on créer la tâche en appelant la fonction createTaskElement (false pour que le bouton soit "Terminer" sinon c'est "En cours")
     document.getElementById("tasksInProgress").appendChild(taskDiv) // on insère la tâche à la fin de tasksInProgress
 
     input.value = ""  // reset de l'input et du text erreur
@@ -40,12 +49,19 @@ function taskExists(name) {
 
 
 // function créer un élément (ici la tâche et les fonction des bouton)
-function createTaskElement(text, isDone) {
+function createTaskElement(text, date ,isDone) {
     const taskDiv = document.createElement("div") // je créer une div avec task-item en classe
     taskDiv.classList.add('task-item') 
     taskDiv.style.display = 'flex'
+    taskDiv.style.alignItems = 'center'
     taskDiv.style.gap = '12px'
 
+    // La date
+    const dateLabel = document.createElement("span")
+    dateLabel.textContent = date
+    dateLabel.style.marginRight = '12px'
+
+    // La tâche
     const taskLabel = document.createElement("span") // je créer un span et mettre un margin right auto pour écarter les bouton
     taskLabel.textContent = text
     taskLabel.style.marginRight = 'auto'
@@ -70,6 +86,29 @@ function createTaskElement(text, isDone) {
     const deleteBtn = document.createElement("button")
     deleteBtn.textContent = "Supprimer"
     deleteBtn.classList.add("btn-delete", "btn")
+
+    // Modifier le style de la date suivant la date du jour
+    const now = new Date().setHours(0,0,0,0)
+    const dateTask = new Date(dateLabel.textContent).setHours(0,0,0,0)
+    if(dateTask < now) {
+        if(dateLabel.classList.contains('text-orange' || 'text-green')) {
+            dateLabel.classList.remove('text-orange')
+            dateLabel.classList.remove('text-green')
+        }
+        dateLabel.classList.add('text-red')
+    } else if(dateTask == now) {
+        if(dateLabel.classList.contains('text-red' || 'text-green')) {
+            dateLabel.classList.remove('text-red')
+            dateLabel.classList.remove('text-green')
+        }
+        dateLabel.classList.add('text-orange')
+    } else {
+        if(dateLabel.classList.contains('text-orange' || 'text-red')) {
+            dateLabel.classList.remove('text-orange')
+            dateLabel.classList.remove('text-red')
+        }
+        dateLabel.classList.add('text-green')
+    }
 
     // LES FONCTIONS DE CHAQUE BOUTONS
 
@@ -105,11 +144,11 @@ function createTaskElement(text, isDone) {
     // Quand on clique sur terminer ou en cours
     validateBtn.addEventListener("click", () => {
         if (!isDone) { // si la tache n'est pas complété
-            const newTask = createTaskElement(taskLabel.textContent, true) // passe en tâches complétées
+            const newTask = createTaskElement(taskLabel.textContent, dateLabel.textContent, true) // passe en tâches complétées
             document.getElementById("tasksDone").appendChild(newTask)
             taskDiv.remove()
         } else { // si elle est complété 
-            const newTask = createTaskElement(taskLabel.textContent, false) // passe en tâches en cours
+            const newTask = createTaskElement(taskLabel.textContent, dateLabel.textContent, false) // passe en tâches en cours
             document.getElementById("tasksInProgress").appendChild(newTask)
             taskDiv.remove()
         }
@@ -119,6 +158,7 @@ function createTaskElement(text, isDone) {
     deleteBtn.addEventListener("click", () => taskDiv.remove())
 
     // CREATION DE TOUTE LA DIV DE LA TACHE (dans le bonne ordre) et on modifie en css le style principale
+    taskDiv.appendChild(dateLabel)
     taskDiv.appendChild(taskLabel)
     taskDiv.appendChild(editBtn)
     taskDiv.appendChild(validateBtn)
