@@ -92,20 +92,17 @@ function createTaskElement(text, date ,isDone) {
     const dateTask = new Date(dateLabel.textContent).setHours(0,0,0,0)
     if(dateTask < now) {
         if(dateLabel.classList.contains('text-orange' || 'text-green')) {
-            dateLabel.classList.remove('text-orange')
-            dateLabel.classList.remove('text-green')
+            dateLabel.classList.remove('text-orange', 'text-green')
         }
         dateLabel.classList.add('text-red')
     } else if(dateTask == now) {
         if(dateLabel.classList.contains('text-red' || 'text-green')) {
-            dateLabel.classList.remove('text-red')
-            dateLabel.classList.remove('text-green')
+            dateLabel.classList.remove('text-red', 'text-green')
         }
         dateLabel.classList.add('text-orange')
     } else {
         if(dateLabel.classList.contains('text-orange' || 'text-red')) {
-            dateLabel.classList.remove('text-orange')
-            dateLabel.classList.remove('text-red')
+            dateLabel.classList.remove('text-orange', 'text-red')
         }
         dateLabel.classList.add('text-green')
     }
