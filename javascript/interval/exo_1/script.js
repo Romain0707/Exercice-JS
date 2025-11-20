@@ -1,6 +1,6 @@
-const div = document.getElementById('welcome')
 
 
-setTimeout(function() {
-    div.textContent = 'Bienvenue dans le monde du JavaScript !'
+
+setTimeout(() => {
+    document.getElementById('welcome').textContent = 'Bienvenue dans le monde du JavaScript !'
 }, 2000)

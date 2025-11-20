@@ -14,10 +14,9 @@ function clocked() {
     if(seconds < 10) {
         seconds ='0' + now.getSeconds()
     }
-    let totalHours = `${hours}:${minutes}:${seconds}`
-    clock.style.fontSize = '50px'
+    let totalHours = `${hours}h${minutes}m${seconds}s`
+    clock.style.fontSize = '200px'
     clock.textContent = totalHours
-    
 }
 
 const interval = setInterval(clocked, 1000)
